@@ -23,16 +23,17 @@ async def forwarder(event):
     reply_msg = event.message.reply_to_msg_id
 
     count = 0
-    for cht in output_chat_id:
-        try:
-            output_channel = await client.send_message(cht, text)
-            print(f"\u001b[32mSENT......{text}....SENT\u001b[37m....")
-        except:
-            print(f"\u001b[31mNot Sent an error occurred {text[:70]} ...Not Sent\u001b[37m...")
+    try:
+        output_channel = await client.send_message(output_chat_id, text)
+        print(f"\u001b[32mSENT......{text}....SENT\u001b[37m....")
+    except:
+        print(f"\u001b[31mNot Sent an error occurred {text[:70]} ...Not Sent\u001b[37m...")
+
 
 @client.on(events.NewMessage)
 async def wakeup(event):
     print('..')
+
 
 client.start()
 client.run_until_disconnected()
